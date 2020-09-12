@@ -1,0 +1,2 @@
+Log Start
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Column, parameter, or variable #1: Cannot find data type VCHAR. (2715) (SQLExecDirectW)')
