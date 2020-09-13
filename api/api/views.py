@@ -1,61 +1,69 @@
 from rest_framework import viewsets
+from rest_framework import status
 from rest_framework import filters
 from . import serializers
 from . import models 
-from django.http import JsonResponse
-
-
-def ui_schema(request):
-    SCHEMA = [{'name': 'Peter', 'email': 'peter@example.org'},
-            {'name': 'Julia', 'email': 'julia@example.org'}]
-    return JsonResponse(SCHEMA, safe=False)
-
 
 # Create your views here.
-class ProjectViewset(viewsets.ModelViewSet):
+class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProjectSerializer
     queryset = models.Project.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['id']
+    search_fields = ["project_id", "name"]
 
 
-class CommandViewset(viewsets.ModelViewSet):
-    serializer_class = serializers.CommandSerializer
-    queryset = models.Command.objects.all()
+class CheckListViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.CheckListSerializer
+    queryset = models.CheckList.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['project_id__id']
+    #search_fields = ["project_id__project_id"]
 
 
-class PlaybookViewset(viewsets.ModelViewSet):
-    serializer_class = serializers.PlaybookSerializer
-    queryset = models.Playbook.objects.all()
+class StigViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.StigSerializer
+    queryset = models.Stig.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['project_id__id']
+    search_fields = ["project_id__project_id"]
 
 
-class AnsibleConfViewset(viewsets.ModelViewSet):
-    serializer_class = serializers.AnsibleConfigurationSerializer
-    queryset = models.AnsibleConfiguration.objects.all()
+class CheckListItemViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.CheckListItemSerializer
+    queryset = models.CheckListItem.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['project_id__id']
+    search_fields = ["project_id__project_id"]
 
 
-class HostViewset(viewsets.ModelViewSet):
-    serializer_class = serializers.HostSerializer
-    queryset = models.Host.objects.all()
+class VulnFixViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VulnFixSerializer
+    queryset = models.VulnFix.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['project_id__id']
+    search_fields = ["project_id__project_id"]
 
 
-class RoleViewset(viewsets.ModelViewSet):
-    serializer_class = serializers.RoleSerializer
-    queryset = models.Role.objects.all()
+class VulnRemoveViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VulnRemoveSerializer
+    queryset = models.VulnRemove.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['project_id__id']
+    search_fields = ["project_id__project_id"]
 
 
-class OutputViewset(viewsets.ModelViewSet):
-    serializer_class = serializers.OutputSerializer
-    queryset = models.Output.objects.all()
+class TestSuiteViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.TestSuiteSerializer
+    queryset = models.TestSuite.objects.all()
+
     filter_backends = [filters.SearchFilter]
-    search_fields = ['project_id__id']
+    search_fields = ["project_id__project_id"]
+
+
+class DeviceViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.DeviceSerializer
+    queryset = models.Device.objects.all()
+
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["project_id__project_id"]

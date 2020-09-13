@@ -1,20 +1,20 @@
-from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from . import views 
+from rest_framework import routers
+from . import views
 
-router = DefaultRouter()
-router.register("project", views.ProjectViewset)
+router = routers.DefaultRouter()
+router.register("projects", views.ProjectViewSet)
+router.register("check-list", views.CheckListViewSet)
 
-router.register("command", views.CommandViewset)
-router.register("playbook", views.PlaybookViewset)
+router.register("stig", views.StigViewSet)
+router.register("check-list-item", views.CheckListItemViewSet)
 
-router.register("ansible-configuration", views.AnsibleConfViewset)
-router.register("host", views.HostViewset)
+router.register("vuln-fix", views.VulnFixViewSet)
+router.register("vuln-remove", views.VulnRemoveViewSet)
 
-router.register("role", views.RoleViewset)
-router.register("output", views.OutputViewset)
+router.register("test-suite", views.TestSuiteViewSet)
+router.register("device", views.DeviceViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
-    path('schema/project/', views.ui_schema, name='ui_schema'),
+    path('v1/', include(router.urls))
 ]

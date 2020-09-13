@@ -1,46 +1,58 @@
 from rest_framework import serializers
-from . import models 
+from . import models
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Project
-        fields = ("id", "project_name", )
+        fields = ("project_id", "project_name", )
         depth = 1
 
 
-class CommandSerializer(serializers.HyperlinkedModelSerializer):
+class CheckListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.Command
+        model = models.CheckList
+        #fields = ("project_id", "checklist_id", "json_config", "stig")
         fields = "__all__"
 
-class PlaybookSerializer(serializers.HyperlinkedModelSerializer):
+
+class StigSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.Playbook
-        fields = ("id", "project_id", "name", "json_playbook", )
+        model = models.Stig
+        fields = ("project_id", "stig_id")
 
 
-class AnsibleConfigurationSerializer(serializers.HyperlinkedModelSerializer):
+class CheckListItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.AnsibleConfiguration
-        fields = ("id", "project_id", "json_config", )
+        model = models.CheckListItem
+        fields = ("project_id", "checklist_item_id", "checklist_id", "vuln_id", 
+                  "fix_id", "removal_id", "vuln_text", "vuln_sev", "vuln_discussion",
+                  "vuln_check_content", "vuln_finding_details", "vuln_reference", 
+                  "vuln_status", "vuln_comments")
 
 
-class HostSerializer(serializers.HyperlinkedModelSerializer):
+class VulnFixSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.Host
-        fields = ("id", "project_id", "name", )
+        model = models.VulnFix
+        fields = ("project_id", "fix_id", "fix_url", "removal_id", "checklist_item_id",
+                  "fix_status", "last_run_time")
 
 
-class RoleSerializer(serializers.HyperlinkedModelSerializer):
+class VulnRemoveSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.Role
-        fields = ("id", "project_id", "name", "role_url", )
+        model = models.VulnRemove
+        fields = ("project_id", "remove_id", "fix_id", "fix_url", "removal_id",
+                  "checklist_item_id", "remove_status", "last_run_time")
 
 
-class OutputSerializer(serializers.HyperlinkedModelSerializer):
+class TestSuiteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.Output
-        fields = ("id", "project_id", "json_output", "start_time", 
-                  "end_time", "status", )
+        model = models.TestSuite
+        fields = ("project_id", "suite_id", "checklist_id", 
+                  "suite_url", "last_run_time", "suite_status")
 
+
+class DeviceSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.Device
+        fields = ("project_id", "device_id", "last_run_time", "suite_test")
