@@ -19,40 +19,47 @@ class CheckListSerializer(serializers.HyperlinkedModelSerializer):
 class StigSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Stig
-        fields = ("project_id", "stig_id")
+        #fields = ("project_id", "stig_name")
+        fields = "__all__"
 
 
 class CheckListItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.CheckListItem
-        fields = ("project_id", "checklist_item_id", "checklist_id", "vuln_id", 
-                  "fix_id", "removal_id", "vuln_text", "vuln_sev", "vuln_discussion",
-                  "vuln_check_content", "vuln_finding_details", "vuln_reference", 
-                  "vuln_status", "vuln_comments")
+        #fields = ("project_id", "checklist_item_id", "checklist_id", "vuln_id", 
+        #          "fix_id", "removal_id", "vuln_text", "vuln_sev", "vuln_discussion",
+        #          "vuln_check_content", "vuln_finding_details", "vuln_reference", 
+        #          "vuln_status", "vuln_comments")
+        fields = "__all__"
 
 
 class VulnFixSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.VulnFix
-        fields = ("project_id", "fix_id", "fix_url", "removal_id", "checklist_item_id",
-                  "fix_status", "last_run_time")
+        #fields = ("project_id", "fix_id", "fix_url", "removal_id", "checklist_item_id",
+        #          "fix_status", "last_run_time")
+        fields = "__all__"
 
 
 class VulnRemoveSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.VulnRemove
-        fields = ("project_id", "remove_id", "fix_id", "fix_url", "removal_id",
-                  "checklist_item_id", "remove_status", "last_run_time")
+        #fields = ("project_id", "remove_id", "fix_id", "fix_url", "removal_id",
+        #          "checklist_item_id", "remove_status", "last_run_time")
+        fields = "__all__"
 
 
 class TestSuiteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.TestSuite
-        fields = ("project_id", "suite_id", "checklist_id", 
-                  "suite_url", "last_run_time", "suite_status")
+        #fields = ("project_id", "suite_id", "checklist_id", 
+        #          "suite_url", "last_run_time", "suite_status")
+        fields = "__all__"
 
 
 class DeviceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Device
-        fields = ("project_id", "device_id", "last_run_time", "suite_test")
+        #fields = ("project_id", "device_id", "last_run_time", "suite_test")
+        fields = "__all__"
+
