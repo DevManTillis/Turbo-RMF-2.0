@@ -16,5 +16,5 @@ router.register("test-suite", views.TestSuiteViewSet)
 router.register("device", views.DeviceViewSet)
 
 urlpatterns = [
-    path('v1/', include(router.urls)),
+    path('v1/', include(router.urls))
 ]

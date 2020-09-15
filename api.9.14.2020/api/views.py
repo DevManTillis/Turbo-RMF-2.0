@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework import filters
-from rest_framework import permissions
 from . import serializers
 from . import models 
 
@@ -13,17 +12,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id", "name"]
 
-    permission_classes = [permissions.IsAuthenticated]
-
 
 class CheckListViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CheckListSerializer
     queryset = models.CheckList.objects.all()
 
     filter_backends = [filters.SearchFilter]
-    search_fields = ["project_id__project_id"]
-
-    permission_classes = [permissions.IsAuthenticated]
+    #search_fields = ["project_id__project_id"]
 
 
 class StigViewSet(viewsets.ModelViewSet):
@@ -33,8 +28,6 @@ class StigViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id__project_id"]
 
-    permission_classes = [permissions.IsAuthenticated]
-
 
 class CheckListItemViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CheckListItemSerializer
@@ -42,8 +35,6 @@ class CheckListItemViewSet(viewsets.ModelViewSet):
 
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id__project_id"]
-
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class VulnFixViewSet(viewsets.ModelViewSet):
@@ -53,8 +44,6 @@ class VulnFixViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id__project_id"]
 
-    permission_classes = [permissions.IsAuthenticated]
-
 
 class VulnRemoveViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.VulnRemoveSerializer
@@ -62,8 +51,6 @@ class VulnRemoveViewSet(viewsets.ModelViewSet):
 
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id__project_id"]
-
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class TestSuiteViewSet(viewsets.ModelViewSet):
@@ -73,8 +60,6 @@ class TestSuiteViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id__project_id"]
 
-    permission_classes = [permissions.IsAuthenticated]
-
 
 class DeviceViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.DeviceSerializer
@@ -82,5 +67,3 @@ class DeviceViewSet(viewsets.ModelViewSet):
 
     filter_backends = [filters.SearchFilter]
     search_fields = ["project_id__project_id"]
-
-    permission_classes = [permissions.IsAuthenticated]

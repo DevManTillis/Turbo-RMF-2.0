@@ -3,3 +3,4 @@ django-phonenumber-field
 django
 django-cors-headers
 ansible==2.9.13
+djangorestframework-simplejwt
