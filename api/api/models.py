@@ -2,33 +2,36 @@ from django.db import models
 
 # Create your models here.
 class Project(models.Model):
-    project_id = models.CharField(max_length=36, unique=True, primary_key=True)
-    name = models.CharField(max_length=25, unique=True)
+    project_id = models.AutoField(primary_key=True)
+    project_name = models.CharField(max_length=25, unique=True)
 
     def __str__(self):
-        return self.project_id
+        return self.project_name
 
 
 class CheckList(models.Model):
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    checklist_id = models.CharField(max_length=36, unique=True, primary_key=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    checklist_name = models.CharField(max_length=36, unique=True)
+    checklist_id = models.AutoField(primary_key=True)
     json_config = models.TextField(max_length=1000)
     stig = models.CharField(max_length=36)
 
     def __str__(self):
-        return self.checklist_id
+        return self.checklist_name
 
 
 class Stig(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    stig_id = models.CharField(max_length=36, unique=True, primary_key=True)
+    stig_id = models.AutoField(primary_key=True)
+    stig_name = models.CharField(max_length=36, unique=True)
 
     def __str__(self):
-        return self.stig_id
+        return self.stig_name
 
 class CheckListItem(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    checklist_item_id = models.CharField(max_length=36, unique=True)
+    checklist_item_id = models.AutoField(primary_key=True)
+    checklist_item_name = models.CharField(max_length=36, unique=True)
     checklist_id = models.ForeignKey(CheckList, on_delete=models.CASCADE)
     vuln_id = models.CharField(max_length=36)
     fix_id = models.CharField(max_length=36, unique=True)
@@ -43,56 +46,54 @@ class CheckListItem(models.Model):
     vuln_comments = models.TextField(max_length=1500)
 
     def __str__(self):
-        return self.checklist_item_id
+        return self.checklist_item_name
 
 
 class VulnFix(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    fix_id = models.CharField(max_length=36, unique=True, primary_key=True)
-    fix_url = models.URLField(unique=True)
+    fix_id = models.AutoField(primary_key=True)
+    fix_name = models.CharField(max_length=36, unique=True)
+    fix_url = models.CharField(max_length=36, unique=True)
     removal_id = models.CharField(max_length=36)
     checklist_item_id = models.ForeignKey(CheckList, on_delete=models.CASCADE)
     fix_status = models.CharField(max_length=36)
     last_run_time = models.CharField(max_length=36)
 
     def __str__(self):
-        return self.fix_id
+        return self.fix_name
 
 
 class VulnRemove(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    remove_id = models.CharField(max_length=36, unique=True, primary_key=True)
+    remove_id = models.AutoField(primary_key=True)
     fix_id = models.CharField(max_length=36, unique=True)
-    fix_url = models.URLField(unique=True)
-    removal_id = models.CharField(max_length=36)
+    remove_url = models.CharField(max_length=36, unique=True)
     checklist_item_id = models.ForeignKey(CheckList, on_delete=models.CASCADE)
     remove_status = models.CharField(max_length=36)
     last_run_time = models.CharField(max_length=36)
 
     def __str__(self):
-        return self.removal_id
+        return self.fix_url
 
 
 class TestSuite(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    suite_id = models.CharField(max_length=36, unique=True, primary_key=True)
+    suite_id = models.AutoField(primary_key=True)
     checklist_id = models.ForeignKey(CheckList, on_delete=models.CASCADE)
     suite_url = models.URLField(unique=True)
     last_run_time = models.CharField(max_length=36)
     suite_status = models.CharField(max_length=36)
 
     def __str__(self):
-        return self.suite_id
+        return self.suite_url
 
 
 class Device(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    device_id = models.CharField(max_length=36, unique=True, primary_key=True)
+    device_id = models.AutoField(primary_key=True)
+    device_name = models.CharField(max_length=36, unique=True)
     last_run_time = models.CharField(max_length=36)
     suite_test = models.CharField(max_length=36)
 
     def __str__(self):
-        return self.device_id
-
-
-
+        return self.device_name
