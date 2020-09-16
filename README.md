@@ -6,7 +6,7 @@
 ```
 cd api/
 ./run.sh
-```bash
+```
 
 # Use API in python Script Example -> api/query_api.py
 1. navigate UI to http://127.0.0.1:8000/api/login
