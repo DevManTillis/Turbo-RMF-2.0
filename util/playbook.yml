@@ -1,0 +1,37 @@
+- hosts: all
+  connection: local
+  tasks:
+    - include_role:
+        name: turbo-test-suite
+      vars: 
+        description: >
+          Run test suite on endpoint in order to ensure the target system/platform
+          that hosts your application is in good health. if the test suite 
+          does not pass stop and log error.
+        tests:
+          - test_name: some_test_name
+        test_groups:
+          - group_name: some_group_of_tests
+
+    - include_role:
+        name: ansible-role-rhel7-stig
+      vars: 
+        description: >
+          Run vulnerabilty fix for target platform on endpoint. Will apply
+          any selected vulnerability mitigations. Log errors, or any fixes that must be manual.
+        apply:
+          become: yes
+          tags:
+            - CCE-27351-6
+
+    - include_role:
+        name: turbo-test-suite
+      vars: 
+        description: >
+          Run test suite on endpoint in order to ensure the target system/platform
+          that hosts your application is in good health after application of vulnerabilty 
+          mitigation/remediation tasks. If the test suite does not pass stop and log error.
+        tests:
+          - test_name: some_test_name
+        test_groups:
+          - group_name: some_group_of_tests

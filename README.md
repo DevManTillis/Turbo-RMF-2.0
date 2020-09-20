@@ -11,6 +11,6 @@ cd api/
 # Use API in python Script Example -> api/query_api.py
 1. navigate UI to http://127.0.0.1:8000/api/login
 2. copy access token
-3. paste access token as string in "token" variable
-4. proceed with requests
+3. paste access token as string in "token" variable in api/query_api.py
+4. proceed with requests ./api/query_api.py
 
