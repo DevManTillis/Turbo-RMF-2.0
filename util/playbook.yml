@@ -7,11 +7,8 @@
         description: >
           Run test suite on endpoint in order to ensure the target system/platform
           that hosts your application is in good health. if the test suite 
-          does not pass stop and log error.
-        tests:
-          - test_name: some_test_name
-        test_groups:
-          - group_name: some_group_of_tests
+          does not pass stop and log error. Will block until a 
+          {"result": true} or {"result": false} is returned. false => stop, true => continue
 
     - include_role:
         name: ansible-role-rhel7-stig
@@ -28,10 +25,10 @@
         name: turbo-test-suite
       vars: 
         description: >
+          Ensure that nothing was broken on the endpoint that had STIGS applied.
           Run test suite on endpoint in order to ensure the target system/platform
-          that hosts your application is in good health after application of vulnerabilty 
-          mitigation/remediation tasks. If the test suite does not pass stop and log error.
-        tests:
-          - test_name: some_test_name
-        test_groups:
-          - group_name: some_group_of_tests
+          that hosts your application is in good health. if the test suite 
+          does not pass stop and log error. Will block until a 
+          {"result": true} or {"result": false} is returned. false => stop, true => continue
+
+

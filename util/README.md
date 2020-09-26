@@ -3,11 +3,7 @@ Turbo-RMF Workflow
 
 Use Ansible + API to create workflow
 
-[] Write all steps/actions to log
-[] Create Project
-[] Upload associated checklists
-[] specify fixes to run
-[] Run Test Suite
+[x] Run Test Suite
 [] Run vulnerability check
    [] Document manual checks
    [] Log start
