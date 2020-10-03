@@ -19,7 +19,8 @@
         apply:
           become: yes
           tags:
-            - CCE-27351-6
+            - "CCE-27351-6"
+        tags: "always"
 
     - include_role:
         name: turbo-test-suite
